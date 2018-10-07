@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--- File per connettersi al database e stampare tutte le info relative ai vaporetti --->
+<!--- File per stampare tutte le info relative ai vaporetti ricercati dall'utente --->
 <html>
   <head>
     <title><?php echo "Progetto PDGT 2018"; ?></title>
@@ -31,7 +31,18 @@
     if ($_GET['route_id'] !== null) {    //se effettuiamo la ricerca secondo il route_id
       $query = "SELECT * FROM VAPORETTI WHERE route_id = ".$_GET['route_id'];    //query che andremo ad eseguire
     }elseif ($_GET['route_short_name'] !== null) {    //se effettuiamo la ricerca secondo il route_short_name
-      $query = "SELECT * FROM VAPORETTI WHERE route_short_name = ".$_GET['route_short_name'];    //query che andremo ad eseguire
+      switch ($_GET['route_short_name']) {
+        case 'BLU':
+        case 'N':
+        case 'DE':    //nel caso il parametro passato sia una delle possibili stringhe
+        case 'NMU':
+        case 'NLN':
+          $query = "SELECT * FROM VAPORETTI WHERE route_short_name = '".$_GET['route_short_name']."'";    //query che andremo ad eseguire
+          break;
+        default:
+          $query = "SELECT * FROM VAPORETTI WHERE route_short_name = ".$_GET['route_short_name'];    //query che andremo ad eseguire
+          break;
+      }
     }elseif ($_GET['route_long_name'] !== null) {    ////se effettuiamo la ricerca secondo il route_long_name di partenza
       $query = "SELECT * FROM VAPORETTI WHERE route_long_name like '".$_GET['route_long_name']."%'";  //query che andremo ad eseguire
     }else {
@@ -41,8 +52,6 @@
     }
 
     echo "<br /><br />\n". PHP_EOL;    //spaziatura
-    var_dump($_GET['route_short_name']);
-
     $count = 0;    //contatore righe informazioni stampate
     if (mysqli_real_query($link, $query)) {                 //tramite questa funz. eseguiamo la query memorizz. nella variabile
       if ($result = mysqli_use_result($link)) {             //tramite questa funzione preleviamo l'ultimo risultato (della query) eseguito sul database $link
@@ -58,9 +67,11 @@
           echo "<div align=center><big><strong>ATTENZIONE ---> Il parametro che si è cercato non è presente nel database.</strong></big></div>";
         }
       }
+    } else {
+      echo "<div align=center><big><strong>ATTENZIONE ---> L'esecuzione della query non è andata a buon fine.</strong></big></div>";    //messaggio di controllo query non eseguita
     }
 
-    mysqli_free_result($result);    //questa funzione serve per indicare che il risultato della query non ci serve più e liberare la memoria
+    mysqli_free_result($result);    //questa funzione serve per indicare che il risultato della query non ci serve più e per liberare la memoria
     mysqli_close($link);            //questa funzione termina la connessione col db
     ?>
   </body>
