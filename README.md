@@ -36,6 +36,7 @@ Usare questo "metodo" per effettuare una ricerca specifica nel database, andando
     <td>Stringa</td>
     <td>Identificatore località di partenza del vaporetto.</td>
   </tr>
+</table>
 
 <br /><br />
 
@@ -61,10 +62,11 @@ Usare questo "metodo" per effettuare una ricerca specifica nel database, andando
   <tr>
     <td>route_id</td>
     <td>Integer</td>
-    <td>Identificatore us da cercare secondo il suo "Id".</td>
+    <td>Identificatore bus da cercare secondo il suo "Id".</td>
   </tr>
   <tr>
     <td>route_long_name</td>
     <td>Stringa</td>
     <td>Identificatore località di partenza del bus.</td>
   </tr>
+</table>
