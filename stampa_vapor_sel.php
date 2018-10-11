@@ -6,11 +6,7 @@
   </head>
   <body>
     <?php
-    define("DB_SERVER", 'localhost');       //elenco delle varie info necessarie per connettersi al db
-    define("DB_USER", "cololoco");
-    define("DB_PASSWORD", "");
-    define("DB_DATABASE", "my_cololoco");
-
+    require 'config.php';  //file di configurazione
     $link = mysqli_connect(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE);     //connessione al db
 
     if (!$link) {      //se la connessione non è avvenuta stampiamo un messaggio di avvertimento
@@ -20,7 +16,7 @@
       exit;
     } else {     //se la connessione è avvenuta stampiamo un messaggio di successo
       echo "<br /><br />\n<table border=\"3\" align=\"center\">\n". PHP_EOL;
-      echo "<tr>\n<td><strong>Lista dei vaporetti ricercati dall'utente che lavorano su territorio veneziano.</strong></td>\n". PHP_EOL;
+      echo "<tr>\n<td><h2>Lista dei vaporetti ricercati dall'utente che lavorano su territorio veneziano.</h2></td>\n". PHP_EOL;
       echo "</table>". PHP_EOL;
     }
 
