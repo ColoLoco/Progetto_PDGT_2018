@@ -6,11 +6,7 @@
   </head>
   <body>
     <?php
-    define("DB_SERVER", 'localhost');       //elenco delle varie info necessarie per connettersi al db
-    define("DB_USER", "cololoco");
-    define("DB_PASSWORD", "");
-    define("DB_DATABASE", "my_cololoco");
-
+    require 'config.php';  //file di configurazione
     $link = mysqli_connect(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE);     //connessione al db
 
     if (!$link) {      //se la connessione non è avvenuta stampiamo un messaggio di avvertimento
