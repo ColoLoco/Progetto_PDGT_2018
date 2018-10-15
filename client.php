@@ -1,4 +1,7 @@
 <?php
+
+//includiamo
+require 'config.php';       //file contenente le info per la connessione al meteo
 require 'functions.php';    //file contenente le funzioni usate dal client
 
 echo "\n------------------------------------\n";
@@ -9,7 +12,10 @@ echo "|                                  |\n";
 echo "| Servizio client per collegamento |\n";
 echo "|    al database dei trasporti     |\n";
 echo "|           veneziani              |\n";
-echo "------------------------------------\n";
+echo "------------------------------------\n\n";
+
+//stampa a schermo delle informazioni meteo veneziane
+meteo($id_city, $appid);
 
 $close_client = 1;    //impostiamo variabile per permettere esecuzione di più richieste da parte dell'utente
 do {
@@ -21,22 +27,17 @@ do {
   echo "\t[5] Chiusura del client.\n\n";
 
   $first_ch = readline();    //la funzione readline() attende la lettura di un valore immesso dall'utente (come la scanf nel C)
-  /*
-  $cmd = fopen("php://stdin","r");
-  $first_ch = fgets($cmd);                          //Per il momento uso la readline() perchè sembra lavorare meglio durante l'esecuzione di php
-  fclose($cmd);
-  */
   $first_ch = intval($first_ch);
   var_dump($first_ch);
 
-  if ($first_ch === 1) {    //uso due uguale perchè il valore passato tramite readline é 'string' --> posso risolvere usando un cast sul valore
-    // Inizializza la richiesta HTTP tramite CURL
+  if ($first_ch === 1) {
+    //inizializzazione richiesta HTTP tramite CURL
     $handle = curl_init('http://cololoco.altervista.org/PDGT/progetto/stampa_db_vapor_json.php');
-    // Richiedi la risposta HTTP come stringa
+    //richiesta della risposta HTTP come stringa
     curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-    // Esegui la richiesta HTTP
+    //esecuzione della richiesta HTTP
     $response = curl_exec($handle);
-    // Estrai il codice di risposta (HTTP status)
+    //estrazione del codice di risposta (HTTP status)
     $http_code = intval(curl_getinfo($handle, CURLINFO_HTTP_CODE));
 
     //stampa ordinata delle info dei vaporetti
@@ -44,23 +45,27 @@ do {
   //TERMINE del codice eseguito con la prima scelta del menù
 
   } elseif ($first_ch === 2) {
-    //uso due uguale perchè il valore passato tramite readline é 'string' --> posso risolvere usando un cast sul valore
+    //ciclo per assicurarsi una corretta scelta da parte dell'utente
+    do {
+      echo "\nScegliere secondo quale caratteristica effettuare la ricerca dei vaporetti:\n";
+      echo "\t[1] Id vaporetto.\t[2] Partenza del vaporetto.\t[3] Id percorso del vaporetto.\n";
+      $second_ch = null;     //inizializziamo la variabile
+      $second_ch = readline();    //caratteristica scelta dall'utente per il filtraggio
+      $second_ch = intval($second_ch);
+      if ((($second_ch !== 1) && ($second_ch !== 2) && ($second_ch !== 3))) {
+        echo "\n\nATTENZIONE --> È stato inserito un valore non ammesso!\n\n";
+      }
+    } while (($second_ch !== 1) && ($second_ch !== 2) && ($second_ch !== 3));   //end do-while di controllo
 
-    echo "\nScegliere secondo quale caratteristica effettuare la ricerca dei vaporetti:\n";
-    echo "\t[1] Id vaporetto.\t[2] Percorso del vaporetto.\t[3] Id percorso del vaporetto.\n";
-    $second_ch = 0;     //inizializziamo la variabile
-    $second_ch = readline();    //caratteristica scelta dall'utente per il filtraggio
-    $second_ch = intval($second_ch);
-    echo "\n\nInserire i caratteri/numeri da ricercare:\n\t";
+    echo "\n\nInserire i caratteri/numeri da ricercare:\n";
     $research = readline();
-
-    //selezione dell'url a cui effettuare richiesta http
+    //selezione dell'url a cui effettuare richiesta HTTP
     if ($second_ch === 1) {
     $research = intval($research);
     var_dump($research);
       $handle = curl_init('http://cololoco.altervista.org/PDGT/progetto/stampa_vapor_sel_json.php?route_id='.$research);
     } elseif ($second_ch === 2){
-      $handle = curl_init('http://cololoco.altervista.org/PDGT/progetto/stampa_vapor_sel_json.php?route_long_name='.$research.'%');
+      $handle = curl_init('http://cololoco.altervista.org/PDGT/progetto/stampa_vapor_sel_json.php?route_long_name='.$research);
       var_dump($research);
     } elseif ($second_ch === 3) {
       $handle = curl_init('http://cololoco.altervista.org/PDGT/progetto/stampa_vapor_sel_json.php?route_short_name='.$research);
@@ -69,38 +74,44 @@ do {
       echo "ATTENZIONE --> È stata inserita un'opzione di ricerca errata.";
     }
 
-    // Richiedi la risposta HTTP come stringa
+    //richiesta della risposta HTTP come stringa
     curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-    // Esegui la richiesta HTTP
+    //esecuzione della richiesta HTTP
     $response = curl_exec($handle);
-    // Estrai il codice di risposta (HTTP status)
+    //estrazione del codice di risposta (HTTP status)
     $http_code = intval(curl_getinfo($handle, CURLINFO_HTTP_CODE));
 
     //stampa ordinata delle info dei vaporetti
     stampa_vapor($http_code,$response);
   //TERMINE del codice eseguito con la seconda scelta del menù
 
-  } elseif ($first_ch === 3) {    //uso due uguale perchè il valore passato trmite readline é 'string' --> posso risolvere usando un cast sul valore
-    // Inizializza la richiesta HTTP tramite CURL
+  } elseif ($first_ch === 3) {
+    //inizializzazione richiesta HTTP tramite CURL
     $handle = curl_init('http://cololoco.altervista.org/PDGT/progetto/stampa_db_bus_json.php');
-    // Richiedi la risposta HTTP come stringa
+    //richiesta della risposta HTTP come stringa
     curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-    // Esegui la richiesta HTTP
+    //esecuzione della richiesta HTTP
     $response = curl_exec($handle);
-    // Estrai il codice di risposta (HTTP status)
+    //estrazione del codice di risposta (HTTP status)
     $http_code = intval(curl_getinfo($handle, CURLINFO_HTTP_CODE));
 
     //stampa ordinata delle info dei vaporetti
     stampa_bus($http_code,$response);
   //TERMINE del codice eseguito con la terza scelta del menù
 
-  }elseif ($first_ch === 4) {       //uso due uguale perchè il valore passato tramite readline é 'string' --> posso risolvere usando un cast sul valore
-    echo "\nScegliere secondo quale caratteristica effettuare la ricerca dei bus:\n";
-    echo "\t[1] Id bus.\t[2] Partenza del bus.\t[3] Id percorso del bus.\n";
-    $second_ch = null;     //inizializziamo la variabile
-    $second_ch = readline();    //caratteristica scelta dall'utente per il filtraggio
-    $second_ch = intval($second_ch);
-    echo "\n\nInserire i caratteri/numeri da ricercare:\n\t";
+  }elseif ($first_ch === 4) {
+    //ciclo per assicurarsi una corretta scelta da parte dell'utente
+    do {
+      echo "\nScegliere secondo quale caratteristica effettuare la ricerca dei bus:\n";
+      echo "\t[1] Id bus.\t[2] Partenza del bus.\t[3] Id percorso del bus.\n";
+      $second_ch = null;     //inizializziamo la variabile
+      $second_ch = readline();    //caratteristica scelta dall'utente per il filtraggio
+      $second_ch = intval($second_ch);
+      if ((($second_ch !== 1) && ($second_ch !== 2) && ($second_ch !== 3))) {
+        echo "\n\nATTENZIONE --> È stato inserito un valore non ammesso.\n\n";
+      }
+    } while (($second_ch !== 1) && ($second_ch !== 2) && ($second_ch !== 3));   //end do-while di controllo
+    echo "\n\nInserire i caratteri/numeri da ricercare:\n";
     $research = readline();
 
     //selezione dell'url a cui effettuare richiesta HTTP
@@ -131,10 +142,11 @@ do {
     exit;    //terminazione del programma
   } else {
     //se viene inserito un carattere del menù differente da quelli richiesti
-    echo "\n\nATTENZIONE --> È stato inserita una scelta diversa da quelle possibili.";
+    echo "\n\nATTENZIONE --> È stato inserito un valore diverso da quelli previsti.\n";
     var_dump($first_ch);
   }
 } while ($close_client !== 0);
+
+//chiusura della sessione CURL
 curl_close($handle);
-echo "\n\nTerminazione corretta del client, arrivederci !\n\n";
 ?>
