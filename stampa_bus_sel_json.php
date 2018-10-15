@@ -100,30 +100,28 @@ if ($_GET['route_id'] !== null) {    //se effettuiamo la ricerca secondo il rout
   $query = "SELECT * FROM BUS WHERE route_long_name like '".$_GET['route_long_name']."%'";  //query che andremo ad eseguire
 }else {
   echo "\n". PHP_EOL;    //spaziatura
-  echo "Attenzione ---> Non è stato passato alcun parametro alla query.";
+  echo "Attenzione ---> Non è stato passato alcun parametro alla query." . PHP_EOL;
   exit;
 }
 
 
 echo "\n". PHP_EOL;    //spaziatura
-$n = 0;    //contatore ciclo while
 $array_data = array();    //creiamo array vuoto;
 if (mysqli_real_query($link, $query)) {                  //tramite questa funz. eseguiamo la query memorizz. nella variabile
   if ($result = mysqli_use_result($link)) {              //tramite questa funzione preleviamo l'ultimo risultato (della query) eseguito sul database $link
     while ($row = mysqli_fetch_row($result)) {           //tramite questa funzione analizziamo tutte le righe (una dopo l'altra) partendo dalla 1° fino all'ultima, fermandoci appena viene restituito 'false'
-        $array_data[$n] = array(
-                    "idBus" => "$row[0]",
-                    "percorsoBus" => "$row[3]",    //memorizziamo nell'array le info che ci interessano
-                    "idPercorsoBus" => "$row[2]"
-                  );
-        $n += 1;
+      $array_data[] = array(
+                  "idBus" => "$row[0]",
+                  "percorsoBus" => "$row[3]",    //memorizziamo nell'array le info che ci interessano
+                  "idPercorsoBus" => "$row[2]"
+                );
     }
   }
 } else {
-  echo "ATTENZIONE ---> L'esecuzione della query non è andata a buon fine.";    //messaggio di controllo query non eseguita
+  echo "ATTENZIONE ---> L'esecuzione della query non è andata a buon fine." . PHP_EOL;    //messaggio di controllo query non eseguita
 }
 
-$elencoBusJson = json_encode($array_data);       //codifichiamo l'array in json per trasferimento dati tramite richiesta http
+$elencoBusJson = json_encode($array_data);       //codifichiamo l'array in json per trasferimento dati tramite richiesta HTTP
 mysqli_free_result($result);    //questa funzione serve per indicare che il risultato della query non ci serve più e liberare la memoria
 mysqli_close($link);            //questa funzione termina la connessione col db
 echo "$elencoBusJson";

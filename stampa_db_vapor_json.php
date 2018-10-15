@@ -12,22 +12,20 @@ if (!$link) {      //se la connessione non è avvenuta stampiamo un messaggio di
 }
 
 $query = "SELECT * FROM VAPORETTI";    //query che andremo ad eseguire
-$n = 0;    //contatore ciclo while
 $array_data = array();    //creiamo array vuoto;
 if (mysqli_real_query($link, $query)) {                  //tramite questa funz. eseguiamo la query memorizz. nella variabile
   if ($result = mysqli_use_result($link)) {              //tramite questa funzione preleviamo l'ultimo risultato (della query) eseguito sul database $link
     while ($row = mysqli_fetch_row($result)) {           //tramite questa funzione analizziamo tutte le righe (una dopo l'altra) partendo dalla 1° fino all'ultima, fermandoci appena viene restituito 'false'
-        $array_data[$n] = array(
-                    "idVaporetto" => "$row[0]",
-                    "percorsoVaporetto" => "$row[3]",    //memorizziamo nell'array le info che ci interessano
-                    "idPercorsoVaporetto" => "$row[2]"
-                  );
-        $n += 1;
+      $array_data[] = array(
+                  "idVaporetto" => "$row[0]",
+                  "percorsoVaporetto" => "$row[3]",    //memorizziamo nell'array le info che ci interessano
+                  "idPercorsoVaporetto" => "$row[2]"
+                );
     }
   }
 }
 
-$elencoVaporJson = json_encode($array_data);       //codifichiamo l'array in json per trasferimento dati tramite richiesta http
+$elencoVaporJson = json_encode($array_data);       //codifichiamo l'array in json per trasferimento dati tramite richiesta HTTP
 mysqli_free_result($result);    //questa funzione serve per indicare che il risultato della query non ci serve più e liberare la memoria
 mysqli_close($link);            //questa funzione termina la connessione col db
 echo "$elencoVaporJson";
