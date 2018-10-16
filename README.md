@@ -24,12 +24,12 @@ Usare questo "metodo" per effettuare una ricerca specifica nel database, andando
   <tr>
     <td>route_short_name</td>
     <td>Integer o Stringa</td>
-    <td>Identificatore vaporetto da cercare secondo il suo nome di "percorso abbreviato".</td>
+    <td>Identificatore vaporetto da cercare secondo il suo ID del percorso.</td>
   </tr>
   <tr>
     <td>route_id</td>
     <td>Integer</td>
-    <td>Identificatore vaporetto da cercare secondo il suo "Id".</td>
+    <td>Identificatore vaporetto da cercare secondo il suo ID.</td>
   </tr>
   <tr>
     <td>route_long_name</td>
@@ -57,12 +57,12 @@ Usare questo "metodo" per effettuare una ricerca specifica nel database, andando
   <tr>
     <td>route_short_name</td>
     <td>Integer o Stringa</td>
-    <td>Identificatore bus da cercare secondo il suo nome di "percorso abbreviato".</td>
+    <td>Identificatore bus da cercare secondo il suo ID del percorso.</td>
   </tr>
   <tr>
     <td>route_id</td>
     <td>Integer</td>
-    <td>Identificatore bus da cercare secondo il suo "Id".</td>
+    <td>Identificatore bus da cercare secondo il suo ID.</td>
   </tr>
   <tr>
     <td>route_long_name</td>
