@@ -1,9 +1,10 @@
 <?php
+/* File contenente il codice sorgente del client */
 
-//includiamo
-require 'config.php';       //file contenente le info di configurazione
-require 'functions.php';    //file contenente le funzioni usate dal client
+//includiamo file contenente le funzioni usate dal client
+require 'functions.php';
 
+//stampa info programmatore e client
 echo "\n------------------------------------\n";
 echo "|  Progetto PDGT  A.A. 2017/2018   |\n";
 echo "|   Studente: Giacomo Colonesi     |\n";
@@ -14,17 +15,17 @@ echo "|    al database dei trasporti     |\n";
 echo "|           veneziani              |\n";
 echo "------------------------------------\n\n";
 
-//stampa a schermo delle informazioni meteo veneziane
-stampa_meteo();
-
 $close_client = 1;    //impostiamo variabile per permettere esecuzione di più richieste da parte dell'utente
+
+//entriamo nel menù
 do {
   echo "\n\nSelezionare la richiesta da eseguire al database: \n";
   echo "\t[1] Stampa completa dei vaporetti.\n";
   echo "\t[2] Stampa dei vaporetti filtrati secondo una caratteristica.\n";
   echo "\t[3] Stampa completa dei bus.\n";
-  echo "\t[4] Stampa dei bus filtrati secondo una caratteristica.\n\n";
-  echo "\t[5] Chiusura del client.\n\n";
+  echo "\t[4] Stampa dei bus filtrati secondo una caratteristica.\n";
+  echo "\t[5] Stampa informazioni meteo in tempo reale.\n\n";
+  echo "\t[6] Chiusura del client.\n\n";
 
   $first_ch = readline();    //la funzione readline() attende la lettura di un valore immesso dall'utente (come la scanf nel C)
   $first_ch = intval($first_ch);
@@ -129,10 +130,14 @@ do {
     stampa_bus($http_code,$response);
   //TERMINE del codice eseguito con la quarta scelta del menù
   } elseif ($first_ch === 5) {
+    //stampa a schermo delle informazioni meteo veneziane
+    stampa_meteo();
+  //TERMINE del codice eseguito con la quinta scelta del menù
+  } elseif ($first_ch === 6) {
     $close_client = 0;    //impostando la variabile a 0 interrompiamo l'esecuzione del client
     echo "\n\nTerminazione corretta del client, arrivederci !\n\n";
     exit;    //terminazione del programma
-  //TERMINE del codice eseguito con la quarta scelta del menù
+  //TERMINE del codice eseguito con la sesta scelta del menù
   } else {
     //se viene inserito un carattere del menù differente da quelli richiesti
     echo "\n\nATTENZIONE --> È stato inserito un valore diverso da quelli previsti.\n";

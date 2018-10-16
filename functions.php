@@ -1,7 +1,6 @@
 <?php
 /* File contenente le varie funzioni usate dal client */
 
-
 /* funzione per la stampa a schermo indentata delle info relative ai vaporetti */
 function stampa_vapor($http_code, $response){
   if($http_code == 200) {
@@ -49,6 +48,7 @@ function stampa_bus($http_code, $response){
   if ($http_code == 200) {
      //risposta HTTP ok
      $data = json_decode($response, true);
+     
      //se è ritornata qualche info dalla richiesta HTTP
      if (count($data) != 0) {
        //stampa info bus
@@ -109,7 +109,7 @@ function stampa_meteo(){
     //stampa del messaggio contenente le info di meteo ed ora corrente
     echo "\n\n-------------------------------------------------------------------------------\n";
     echo "  $response";
-    echo "-------------------------------------------------------------------------------\n\n";
+    echo "-------------------------------------------------------------------------------\n";
   } else {
       //se avviene qualche errore
       echo "Qualcosa riguardante la richiesta meteo non ha funzionato! #{$http_code}" . PHP_EOL;

@@ -1,14 +1,14 @@
 <?php
-/*
-Codice per la stampa del giorno corrente e della situazione meteo a Venezia
-*/
+/* API per la stampa del giorno corrente e della situazione meteo a Venezia */
 
+//includiamo file di configurazione
 require 'config.php';
 
+//impostiamo informazioni header richiesta HTTP
+header("Content-Type: text/plain; charset=UTF-8");
 //inizializzazione della richiesta HTTP tramite CURL
 $url = 'http://api.openweathermap.org/data/2.5/weather?id='.$id_city.'&appid='.$appid;
 $handle = curl_init($url);
-
 //richiesta della risposta HTTP come stringa
 curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
 //esecuzione della richiesta HTTP

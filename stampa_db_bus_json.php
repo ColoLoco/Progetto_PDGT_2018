@@ -1,5 +1,7 @@
 <?php
-require 'config.php';    //file di configurazione
+/* API per la stampa di tutti i bus */
+
+require 'config.php';    //includiamo file di configurazione
 header("Content-Type: application/json; charset=UTF-8");   /* info passate tramite header per indicare la tipologia di valore
                                                               ritornato in seguito all'elaborazione del codice della pagina web */
 $link = mysqli_connect(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE);     //connessione al db
@@ -8,7 +10,7 @@ if (!$link) {      //se la connessione non è avvenuta stampiamo un messaggio di
   echo "Errore: Impossibile connettersi al database MySQL." . PHP_EOL;
   echo "<br />Debugging errno: " . my_sqli_errno() . PHP_EOL;
   echo "<br />Debugging error: " . my_sqli_error() . PHP_EOL;
-  exit;
+  exit;    //terminiamo l'esec. dello script
 }
 
 $query = "SELECT * FROM BUS";    //query che andremo ad eseguire

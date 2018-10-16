@@ -1,5 +1,7 @@
 <?php
-require 'config.php';    //file di configurazione
+/* API per la stampa dei bus filtrati secondo un criterio */
+
+require 'config.php';    //includiamo file di configurazione
 header("Content-Type: application/json; charset=UTF-8");   /* info passate tramite header per indicare la tipologia di valore
                                                               ritornato in seguito all'elaborazione del codice della pagina web */
 $link = mysqli_connect(DB_SERVER , DB_USER, DB_PASSWORD, DB_DATABASE);     //connessione al db
@@ -11,13 +13,10 @@ if (!$link) {      //se la connessione non è avvenuta stampiamo un messaggio di
   exit;
 }
 
-/*
-A seconda delle informazioni passate dall'utente effettuiamo una ricerca differente
-*/
-
+//a seconda delle informazioni passate dall'utente effettuiamo una ricerca differente
 if ($_GET['route_id'] !== null) {    //se effettuiamo la ricerca secondo il route_id
   $query = "SELECT * FROM BUS WHERE route_id = ".$_GET['route_id'];    //query che andremo ad eseguire
-}elseif ($_GET['route_short_name'] !== null) {    //se effettuiamo la ricerca secondo il route_short_name
+} elseif ($_GET['route_short_name'] !== null) {    //se effettuiamo la ricerca secondo il route_short_name
   switch ($_GET['route_short_name']) {
     case 'A':
     case 'N':
@@ -96,12 +95,12 @@ if ($_GET['route_id'] !== null) {    //se effettuiamo la ricerca secondo il rout
       $query = "SELECT * FROM BUS WHERE route_short_name = ".$_GET['route_short_name'];    //query che andremo ad eseguire
       break;
   }
-}elseif ($_GET['route_long_name'] !== null) {    ////se effettuiamo la ricerca secondo il route_long_name di partenza
+} elseif ($_GET['route_long_name'] !== null) {    //se effettuiamo la ricerca secondo il route_long_name di partenza
   $query = "SELECT * FROM BUS WHERE route_long_name like '".$_GET['route_long_name']."%'";  //query che andremo ad eseguire
-}else {
+} else {
   echo "\n". PHP_EOL;    //spaziatura
   echo "Attenzione ---> Non è stato passato alcun parametro alla query." . PHP_EOL;
-  exit;
+  exit;    //terminiamo l'esecuzione dello script
 }
 
 
