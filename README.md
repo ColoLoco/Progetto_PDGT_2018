@@ -10,6 +10,24 @@ Studente: Giacomo Colonesi  &nbsp;&nbsp;&nbsp;&nbsp;  Matricola: 274146
 <strong>stampa_db_vapor_json.php</strong> <br />
 Usare questo "metodo" per richiedere al server la visualizzazione completa di tutti i vaporetti presenti all'interno del database.
 Non richiede parametri. Restituisce la lista dei vaporetti in formato JSON.
+<br /><br /><i>Esempio di lista in JSON restituita:</i><br /><br />
+[<br />
+ &nbsp;&nbsp;&nbsp;{<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idVaporetto":"10",<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"percorsoVaporetto":"Lido (S.M.E.) \"D\" - P.le Roma (S. Chiara) \"G\"",<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idPercorsoVaporetto":"1"<br />
+  &nbsp;&nbsp;&nbsp;},<br />
+  &nbsp;&nbsp;&nbsp;{<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idVaporetto":"11",<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"percorsoVaporetto":"Lido (S.M.E.) \"D\" - P.le Roma (S. Chiara) \"G\"",<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idPercorsoVaporetto":"1"<br />
+  &nbsp;&nbsp;&nbsp;},<br />
+  &nbsp;&nbsp;&nbsp;{<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idVaporetto":"12",<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"percorsoVaporetto":"Lido (S.M.E.) \"D\" - P.le Roma (S. Chiara) \"G\"",<br />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idPercorsoVaporetto":"1"<br />
+  &nbsp;&nbsp;&nbsp;}<br />
+  ]<br />
 
 <br /><br />
 
@@ -37,6 +55,9 @@ Usare questo "metodo" per effettuare una ricerca specifica nel database, andando
     <td>Identificatore località di partenza del vaporetto.</td>
   </tr>
 </table>
+
+<br /><br /><i>Esempio di URL valida, completa di query:</i><br /><br />
+http://cololoco.altervista.org/PDGT/progetto/stampa_vapor_sel_json.php?route_id=100
 
 <br /><br />
 
