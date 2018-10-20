@@ -32,7 +32,7 @@ Non richiede parametri. Se la richiesta HTTP ha successo restituisce la lista de
 <br /><br />
 
 <strong>stampa_vapor_sel_json.php</strong> <br />
-Usare questa API per effettuare una ricerca specifica nel database, andando a cercare l'unico parametro passato come query. Se la richiesta HTTP ha successo restituisce la lista dei vaporetti trovati in formato JSON, altrimenti ritorna lo stato HTTP #400.
+Usare questa API per effettuare una ricerca specifica nel database, andando a cercare l'unico parametro passato nella query. Se la richiesta HTTP ha successo restituisce la lista dei vaporetti trovati in formato JSON, altrimenti ritorna lo stato HTTP #400.
 <table>
   <tr>
     <td><b>Parametri</b></td>
@@ -86,7 +86,7 @@ Non richiede parametri. Se la richiesta HTTP ha successo restituisce la lista co
 <br /><br />
 
 <strong>stampa_bus_sel_json.php</strong> <br />
-Usare questa API per effettuare una ricerca specifica nel database, andando a cercare l'unico parametro passato come query. Se la richiesta HTTP ha successo restituisce la lista dei bus trovati in formato JSON, altrimenti ritorna lo stato HTTP #400.
+Usare questa API per effettuare una ricerca specifica nel database, andando a cercare l'unico parametro passato nella query. Se la richiesta HTTP ha successo restituisce la lista dei bus trovati in formato JSON, altrimenti ritorna lo stato HTTP #400.
 <table>
   <tr>
     <td><b>Parametri</b></td>
