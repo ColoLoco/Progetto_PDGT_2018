@@ -139,3 +139,6 @@ L'utente può effettuare tutte le interrogazioni che vuole con il client, una vo
 # OpenAPI specification
 Il file "OpenAPI_specification.yaml" è stato scritto secondo le specifiche di OpenAPI 3.0 e di Swagger 2.0.<br />
 Importando il file nell'editor di testo offerto da Swagger si ha l'opportunità di poter osservare più intuitivamente il comportamento delle API, con quali informazioni interagiscono e quali metodi HTTP sfruttano per le loro richieste.
+
+<br /><i>Collegamento all'editor:</i><br />
+https://editor.swagger.io/
