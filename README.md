@@ -59,7 +59,7 @@ Usare questa API per effettuare una ricerca specifica nel database, andando a ce
 <br /><i>Esempio di URL valida, completa di query:</i><br />
 http://cololoco.altervista.org/PDGT/progetto/stampa_vapor_sel_json.php?route_id=100
 
-<br /><br />
+<br />
 
 <strong>stampa_db_bus_json.php</strong> <br />
 Usare questa API per richiedere al server la visualizzazione completa di tutti i bus presenti all'interno del database.
@@ -113,7 +113,7 @@ Usare questa API per effettuare una ricerca specifica nel database, andando a ce
 <br /><i>Esempio di URL valida, completa di query:</i><br />
 http://cololoco.altervista.org/PDGT/progetto/stampa_bus_sel_json.php?route_long_name=DE
 
-<br /><br />
+<br />
 
 <strong>meteo.php</strong> <br />
 Tramite questa API vengono raccolte le info riguardanti il meteo di Venezia, prese direttamente dal sito "openweathermap.org".
