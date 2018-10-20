@@ -27,9 +27,9 @@ Non richiede parametri. Se la richiesta HTTP ha successo restituisce la lista de
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"percorsoVaporetto":"Lido (S.M.E.) \"D\" - P.le Roma (S. Chiara) \"G\"",<br />
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idPercorsoVaporetto":"1"<br />
  &nbsp;&nbsp;&nbsp;}<br />
-]
+]<br />
 
-<br /><br />
+<br />
 
 <strong>stampa_vapor_sel_json.php</strong> <br />
 Usare questa API per effettuare una ricerca specifica nel database, andando a cercare il parametro passato nell'URL all'interno del database.Se la richiesta HTTP ha successo restituisce la lista dei vaporetti trovati in formato JSON, altrimenti ritorna lo stato HTTP #400.
@@ -55,18 +55,16 @@ Usare questa API per effettuare una ricerca specifica nel database, andando a ce
     <td>Identificatore località di partenza del vaporetto.</td>
   </tr>
 </table>
-
 <br /><i>Esempio di URL valida, completa di query:</i><br />
 http://cololoco.altervista.org/PDGT/progetto/stampa_vapor_sel_json.php?route_id=100
 
-<br /><br />
+<br />
 
 <strong>stampa_db_bus_json.php</strong> <br />
 Usare questa API per richiedere al server la visualizzazione completa di tutti i bus presenti all'interno del database.
 Non richiede parametri. Se la richiesta HTTP ha successo restituisce la lista completa dei bus in formato JSON, altrimenti ritorna lo stato HTTP #400.
 
 <br /><br /><i>Esempio di lista in JSON restituita:</i><br /><br />
-
 [<br />
  &nbsp;&nbsp;&nbsp;{<br />
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idBus":"53",<br />
@@ -83,9 +81,9 @@ Non richiede parametri. Se la richiesta HTTP ha successo restituisce la lista co
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"percorsoBus":"Scuole - Cavalieri Vittorio Veneto",<br />
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"idPercorsoBus":"11E"<br />
  &nbsp;&nbsp;&nbsp;}<br />
-]
+]<br />
 
-<br /><br />
+<br />
 
 <strong>stampa_bus_sel_json.php</strong> <br />
 Usare questa API per effettuare una ricerca specifica nel database, andando a cercare il parametro passato nell'URL all'interno del database. Se la richiesta HTTP ha successo restituisce la lista dei bus trovati in formato JSON, altrimenti ritorna lo stato HTTP #400.
@@ -114,6 +112,7 @@ Usare questa API per effettuare una ricerca specifica nel database, andando a ce
 
 <br /><i>Esempio di URL valida, completa di query:</i><br />
 http://cololoco.altervista.org/PDGT/progetto/stampa_bus_sel_json.php?route_long_name=DE
+
 <br /><br />
 
 <strong>meteo.php</strong> <br />
