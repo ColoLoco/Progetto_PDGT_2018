@@ -1,0 +1,143 @@
+swagger: "2.0"
+info:
+  description: "Questo è un client che permette il collegamento ad una serie di API create con lo scopo di fornire informazioni riguardanti i vaporetti, gli autobus ed il meteo di Venezia."
+  version: "1.0.0"
+  title: "Client per il collegamento al database dei trasporti veneziani"
+  contact:
+    name: "Giacomo Colonesi"
+    email: "g.colonesi@gmail.com"
+host: "cololoco.altervista.org"
+
+tags:
+- name: "vaporetti"
+  description: "Operazioni eseguibili sul db dei vaporetti"
+- name: "bus"
+  description: "Operazioni eseguibili sul db dei bus"
+- name: "meteo"
+  description: "Operazioni riguardanti il meteo"
+schemes:
+- "http"
+
+paths:
+  /PDGT/progetto/stampa_db_vapor_json.php:
+    get:
+      tags:
+      - "vaporetti"
+      summary: "Stampa tutti i vaporetti nel db"
+      description: "Visita il db e restituisce tutti i vaporetti e relative informazioni."
+      operationId: "printVapor"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Operazione correttamente eseguita."
+          schema:
+            type: "string"
+        400:
+          description: "Qualche errore."
+
+  /PDGT/progetto/stampa_vapor_sel_json.php:
+    get:
+      tags:
+      - "vaporetti"
+      summary: "Cerca un determinato vaporetto"
+      description: "Effettua una ricerca sul db andando a verificare la presenza del parametro specificato dall'utente."
+      operationId: "searchVapor"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "route_id"
+        in: "query"
+        description: "ID del vaporetto."
+        schema:
+          type: "integer"
+          example: "46"
+      - in: "query"
+        name: "route_long_name"
+        description: "Luogo di partenza del vaporetto."
+        schema:
+          type: "string"
+          example: "Lido"
+      - in: "query"
+        name: "route_short_name"
+        description: "ID del percorso del vaporetto."
+        schema:
+          type: "string, integer"
+          example: "DE"
+      responses:
+        200:
+          description: "Operazione correttamente eseguita."
+          schema:
+            type: "string"
+        400:
+          description: "Qualche errore."
+
+  /PDGT/progetto/stampa_db_bus_json.php:
+    get:
+      tags:
+      - "bus"
+      summary: "Stampa tutti i bus nel db"
+      description: "Visita il db e restituisce tutti i bus e relative informazioni in formato JSON."
+      operationId: "printBus"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Operazione correttamente eseguita."
+          schema:
+            type: "string"
+        400:
+          description: "Qualche errore."
+
+  /PDGT/progetto/stampa_bus_sel_json.php:
+    get:
+      tags:
+      - "bus"
+      summary: "Cerca un determinato bus"
+      description: "Effettua una ricerca sul db andando a verificare la presenza del parametro specificato dall'utente."
+      operationId: "searchBus"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "route_id"
+        in: "query"
+        description: "ID del bus."
+        schema:
+          type: "integer"
+          example: "654"
+      - name: "route_long_name"
+        in: "query"
+        description: "Luogo di partenza del bus."
+        schema:
+          type: "string"
+          example: "Mestre"
+      - name: "route_short_name"
+        in: "query"
+        description: "ID percorso del bus."
+        schema:
+          type: "string, integer"
+          example: "10E"
+      responses:
+        200:
+          description: "Operazione correttamente eseguita."
+          schema:
+            type: "string"
+        400:
+          description: "Qualche errore."
+
+  /PDGT/progetto/meteo.php:
+    get:
+      tags:
+      - "meteo"
+      summary: "Visualizza info meteo"
+      description: "Visualizza le info in tempo reale del meteo di Venezia."
+      operationId: "meteoVenice"
+      produces:
+      - "text/plain"
+      responses:
+        200:
+          description: "Operazione correttamente eseguita."
+          schema:
+            type: "string"
+        400:
+          description: "Qualche errore."

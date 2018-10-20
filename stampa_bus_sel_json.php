@@ -17,10 +17,10 @@ if (!$link) {      //se la connessione non è avvenuta stampiamo un messaggio di
 if ($_GET['route_id'] !== null) {    //se effettuiamo la ricerca secondo il route_id
   $query = "SELECT * FROM BUS WHERE route_id = ".$_GET['route_id'];    //query che andremo ad eseguire
 } elseif ($_GET['route_short_name'] !== null) {    //se effettuiamo la ricerca secondo il route_short_name
-  switch ($_GET['route_short_name']) {
+  switch ($_GET['route_short_name']) {    //nel caso il parametro passato sia una delle possibili stringhe
     case 'A':
     case 'N':
-    case 'B':                  //nel caso il parametro passato sia una delle possibili stringhe
+    case 'B':
     case 'C':
     case 'V':
     case 'OMN':
@@ -98,13 +98,10 @@ if ($_GET['route_id'] !== null) {    //se effettuiamo la ricerca secondo il rout
 } elseif ($_GET['route_long_name'] !== null) {    //se effettuiamo la ricerca secondo il route_long_name di partenza
   $query = "SELECT * FROM BUS WHERE route_long_name like '".$_GET['route_long_name']."%'";  //query che andremo ad eseguire
 } else {
-  echo "\n". PHP_EOL;    //spaziatura
-  echo "Attenzione ---> Non è stato passato alcun parametro alla query." . PHP_EOL;
+  http_response_code(400);        //modifichiamo il codice di risposta di HTTP impostandolo 400
   exit;    //terminiamo l'esecuzione dello script
 }
 
-
-echo "\n". PHP_EOL;    //spaziatura
 $array_data = array();    //creiamo array vuoto;
 if (mysqli_real_query($link, $query)) {                  //tramite questa funz. eseguiamo la query memorizz. nella variabile
   if ($result = mysqli_use_result($link)) {              //tramite questa funzione preleviamo l'ultimo risultato (della query) eseguito sul database $link
@@ -115,9 +112,16 @@ if (mysqli_real_query($link, $query)) {                  //tramite questa funz. 
                   "idPercorsoBus" => "$row[2]"
                 );
     }
+    //se l'array risulta essere vuoto
+    if (count($array_data) == 0) {
+      http_response_code(400);        //modifichiamo il codice di risposta di HTTP impostandolo 400
+      exit;                           //terminiamo l'esecuzione dello script
+    }
   }
 } else {
-  echo "ATTENZIONE ---> L'esecuzione della query non è andata a buon fine." . PHP_EOL;    //messaggio di controllo query non eseguita
+  //risposta HTTP con errore
+  http_response_code(400);        //modifichiamo il codice di risposta di HTTP impostandolo 400
+  exit;                           //terminiamo l'esecuzione dello script
 }
 
 $elencoBusJson = json_encode($array_data);       //codifichiamo l'array in json per trasferimento dati tramite richiesta HTTP

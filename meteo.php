@@ -17,7 +17,7 @@ $response = curl_exec($handle);
 $http_code = intval(curl_getinfo($handle, CURLINFO_HTTP_CODE));
 
 if($http_code == 200) {
-  // risposta HTTP ok
+  //risposta HTTP ok
   $data = json_decode($response, TRUE);
   $location = $data[name];               //nome del luogo di cui sono state richieste le info meteo
   $weather = $data[weather][0][main];    /* sostituire 'main' con 'description' per avere stampato il meteo "effettivo" (es: light rain, very sunny...)
@@ -28,7 +28,8 @@ if($http_code == 200) {
   //stampa del messaggio contenente le info di meteo ed ora corrente
   echo "Today $today at the hour $hour.$minute the weather in $location is: $weather." . PHP_EOL;
 } else {
-    //qualche errore
-    echo "Qualcosa riguardante la richiesta meteo non ha funzionato! #{$http_code}" . PHP_EOL;
+  //risposta HTTP con errore
+  http_response_code(400);        //modifichiamo il codice di risposta di HTTP impostandolo 400
+  exit;                           //terminiamo l'esecuzione dello script
 }
 ?>

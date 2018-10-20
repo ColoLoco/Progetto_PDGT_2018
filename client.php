@@ -15,7 +15,7 @@ echo "|    al database dei trasporti     |\n";
 echo "|           veneziani              |\n";
 echo "------------------------------------\n\n";
 
-$close_client = 1;    //impostiamo variabile per permettere esecuzione di più richieste da parte dell'utente
+$close_client = 1;    //impostiamo variabile di controllo ciclo do-while del menù
 
 //entriamo nel menù
 do {
@@ -27,7 +27,7 @@ do {
   echo "\t[5] Stampa informazioni meteo in tempo reale.\n\n";
   echo "\t[6] Chiusura del client.\n\n";
 
-  $first_ch = readline();    //la funzione readline() attende la lettura di un valore immesso dall'utente (come la scanf nel C)
+  $first_ch = readline();    //acquisizione scelta dell'utente
   $first_ch = intval($first_ch);
 
   if ($first_ch === 1) {
@@ -67,7 +67,7 @@ do {
     } elseif ($second_ch === 3) {
       $handle = curl_init('http://cololoco.altervista.org/PDGT/progetto/stampa_vapor_sel_json.php?route_short_name='.$research);
     } else {
-      echo "ATTENZIONE --> È stata inserita un'opzione di ricerca errata.";
+      echo "ATTENZIONE --> È stata inserita un'opzione di ricerca errata." . PHP_EOL;
     }
 
     //settaggio della risposta HTTP come stringa
@@ -116,7 +116,7 @@ do {
     } elseif ($second_ch === 3) {
       $handle = curl_init('http://cololoco.altervista.org/PDGT/progetto/stampa_bus_sel_json.php?route_short_name='.$research);
     } else {
-      echo "ATTENZIONE --> È stata inserita un'opzione di ricerca errata.";
+      echo "ATTENZIONE --> È stata inserita un'opzione di ricerca errata." . PHP_EOL;
     }
 
     //settaggio della risposta HTTP come stringa
@@ -140,7 +140,7 @@ do {
   //TERMINE del codice eseguito con la sesta scelta del menù
   } else {
     //se viene inserito un carattere del menù differente da quelli richiesti
-    echo "\n\nATTENZIONE --> È stato inserito un valore diverso da quelli previsti.\n";
+    echo "\n\nATTENZIONE --> È stato inserito un valore diverso da quelli previsti." . PHP_EOL;
   }
 } while ($close_client !== 0);    //end do-while
 
