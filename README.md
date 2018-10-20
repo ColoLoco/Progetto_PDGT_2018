@@ -55,15 +55,15 @@ Usare questa API per effettuare una ricerca specifica nel database, andando a ce
     <td>Identificatore località di partenza del vaporetto.</td>
   </tr>
 </table>
+
 <br /><i>Esempio di URL valida, completa di query:</i><br />
 http://cololoco.altervista.org/PDGT/progetto/stampa_vapor_sel_json.php?route_id=100
 
-<br />
+<br /><br />
 
 <strong>stampa_db_bus_json.php</strong> <br />
 Usare questa API per richiedere al server la visualizzazione completa di tutti i bus presenti all'interno del database.
 Non richiede parametri. Se la richiesta HTTP ha successo restituisce la lista completa dei bus in formato JSON, altrimenti ritorna lo stato HTTP #400.
-
 <br /><br /><i>Esempio di lista in JSON restituita:</i><br /><br />
 [<br />
  &nbsp;&nbsp;&nbsp;{<br />
